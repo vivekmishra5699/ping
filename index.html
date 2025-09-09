@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FastAPI Keep Alive</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+    }
+
+    /* Floating icons */
+    .icon {
+      position: absolute;
+      font-size: 2rem;
+      animation: float 10s infinite linear;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🐾 FastAPI Keep-Alive</h1>
+  <p>Keeping your Render server awake with love 💖</p>
+
+  <script>
+    const url = "https://backend-app-zqdm.onrender.com/"; // replace with your Render URL
+
+    async function ping() {
+      try {
+        await fetch(url, { mode: "no-cors" });
+        console.log("Pinged at " + new Date().toLocaleTimeString());
+      } catch (e) {
+        console.error("Ping failed", e);
+      }
+    }
+
+    // Ping immediately, then every 30s
+    ping();
+    setInterval(ping, 30000);
+
+    // Floating cute icons
+    const icons = ["🌸", "✨", "🐱", "💖", "🌈", "⭐", "🐰", "🍭"];
+    function createIcon() {
+      const icon = document.createElement("div");
+      icon.className = "icon";
+      icon.innerText = icons[Math.floor(Math.random() * icons.length)];
+      icon.style.left = Math.random() * 100 + "vw";
+      icon.style.animationDuration = 5 + Math.random() * 10 + "s";
+      icon.style.fontSize = 20 + Math.random() * 40 + "px";
+      document.body.appendChild(icon);
+
+      setTimeout(() => {
+        icon.remove();
+      }, 15000);
+    }
+
+    setInterval(createIcon, 800);
+  </script>
+</body>
+</html>
